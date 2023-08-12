@@ -1,0 +1,93 @@
+ Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Password for user postgres:
+psql (15.2)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# bd_sistema_bancario
+postgres-# \c bd_sistema_bancario;
+You are now connected to database "bd_sistema_bancario" as user "postgres".
+bd_sistema_bancario-# \dt
+             List of relations
+ Schema |      Name      | Type  |  Owner
+--------+----------------+-------+----------
+ public | tabela1        | table | postgres
+ public | tabela2        | table | postgres
+ public | tabela3        | table | postgres
+ public | tabela4        | table | postgres
+ public | tabela5        | table | postgres
+ public | tabela_cliente | table | postgres
+(6 rows)
+
+
+bd_sistema_bancario-# create table tabela_conta (numero_conta integer, nome_agencia varchar [20], saldo integer);
+ERROR:  syntax error at or near "bd_sistema_bancario"
+LINE 1: bd_sistema_bancario
+        ^
+bd_sistema_bancario=# create table tabela_conta (numero_conta integer, nome_agencia varchar [20], saldo integer);
+CREATE TABLE
+bd_sistema_bancario=# create table tabela_emprestimo (numero_emprestimo integer, nome_agencia varchar [20], valor integer);
+CREATE TABLE
+bd_sistema_bancario=# create table tabela_agencia (nome_agencia varchar [20], cidade_agencia varchar [30], depositos integer);
+CREATE TABLE
+bd_sistema_bancario=# \dt
+               List of relations
+ Schema |       Name        | Type  |  Owner
+--------+-------------------+-------+----------
+ public | tabela1           | table | postgres
+ public | tabela2           | table | postgres
+ public | tabela3           | table | postgres
+ public | tabela4           | table | postgres
+ public | tabela5           | table | postgres
+ public | tabela_agencia    | table | postgres
+ public | tabela_cliente    | table | postgres
+ public | tabela_conta      | table | postgres
+ public | tabela_emprestimo | table | postgres
+(9 rows)
+
+
+bd_sistema_bancario=# drop table tabela1;
+DROP TABLE
+bd_sistema_bancario=# drop table tabela2;
+DROP TABLE
+bd_sistema_bancario=# drop table tabela3;
+DROP TABLE
+bd_sistema_bancario=# drop table tabela4;
+DROP TABLE
+bd_sistema_bancario=# drop table tabela5;
+DROP TABLE
+bd_sistema_bancario=# \dt
+               List of relations
+ Schema |       Name        | Type  |  Owner
+--------+-------------------+-------+----------
+ public | tabela_agencia    | table | postgres
+ public | tabela_cliente    | table | postgres
+ public | tabela_conta      | table | postgres
+ public | tabela_emprestimo | table | postgres
+(4 rows)
+
+
+bd_sistema_bancario=# alter table cliente add column idade integer;
+ERROR:  relation "cliente" does not exist
+bd_sistema_bancario=# ALTER TABLE tabela_cliente ADD COLUMN idade integer;
+ALTER TABLE
+bd_sistema_bancario=# ALTER TABLE tabela_cliente RENAME COLUMN idade TO idades;
+ALTER TABLE
+bd_sistema_bancario=# ALTER TABLE tabela_cliente DROP COLUMN idades;
+ALTER TABLE
+bd_sistema_bancario=# ALTER TABLE tabela_cliente rename to tbcliente;
+ALTER TABLE
+bd_sistema_bancario=#               
+List of relations
+ Schema |       Name        | Type  |  Owner
+--------+-------------------+-------+----------
+ public | tabela_agencia    | table | postgres
+ public | tabela_conta      | table | postgres
+ public | tabela_emprestimo | table | postgres
+ public | tbcliente         | table | postgres
+(4 rows)
